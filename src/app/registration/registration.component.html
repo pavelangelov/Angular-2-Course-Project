@@ -1,18 +1,50 @@
 <div class="form-group col-sm-6 col-sm-offset-3">
   <label for="reg-username">Email / Username</label>
-  <input type="text" class="form-control" id="reg-username" required [(ngModel)]="model.username" name="username">
-  <label for="reg-password">Password</label>
-  <input type="text" class="form-control" id="reg-password" required [(ngModel)]="model.password" name="password">
-  <label for="firstname">First name</label>
-  <input type="text" class="form-control" id="firstname" required [(ngModel)]="model.firstname" name="firstname">
-  <label for="lastname">Last name</label>
-  <input type="text" class="form-control" id="lastname" required [(ngModel)]="model.lastname" name="lastname">
-  <button type="button" class="btn btn-success form-control" (click)="onSubmit()">Register</button>
-</div>
+  <input type="text" 
+          class="form-control" 
+          id="reg-username" required 
+          [(ngModel)]="model.username" 
+          name="username" 
+          #username="ngModel" >
+  <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
+          Email / Username field is required!
+  </div>
 
-<div class="form-group">
-  <p class="for-control">Input username: {{model.username}}</p>
-  <p class="for-control">Input password: {{model.password}}</p>
-  <p class="for-control">Input firstname: {{model.firstname}}</p>
-  <p class="for-control">Input lastname: {{model.lastname}}</p>
+  <label for="reg-password">Password</label>
+  <input type="text" 
+          class="form-control" 
+          id="reg-password" 
+          required 
+          [(ngModel)]="model.password" 
+          name="password"
+          #password="ngModel">
+   <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+      Password field is required!
+   </div>
+
+  <label for="firstname">Firstname</label>
+  <input type="text" 
+          class="form-control" 
+          id="firstname" 
+          required 
+          [(ngModel)]="model.firstname" 
+          name="firstname"
+          #firstname='ngModel'>
+   <div [hidden]="firstname.valid || firstname.pristine" class="alert alert-danger">
+      Firstname field is required!
+   </div>
+
+  <label for="lastname">Lastname</label>
+  <input type="text" 
+          class="form-control" 
+          id="lastname" 
+          required 
+          [(ngModel)]="model.lastname" 
+          name="lastname"
+          #lastname='ngModel'>
+   <div [hidden]="lastname.valid || lastname.pristine" class="alert alert-danger">
+      Lastname field is required!
+   </div>
+
+  <button type="button" class="btn btn-success form-control" (click)="onSubmit()">Register</button>
 </div>
