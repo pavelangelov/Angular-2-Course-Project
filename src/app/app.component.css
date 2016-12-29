@@ -1,0 +1,18 @@
+header {
+    color: #fff;
+    background-color: seagreen;
+    border-bottom: 1px solid dimgrey;
+    padding-bottom: 10px;
+}
+
+header a {
+    color: #fff;
+}
+
+#container {
+    padding-top: 5px;
+}
+
+.for-test {
+    padding-top: 10px;
+}

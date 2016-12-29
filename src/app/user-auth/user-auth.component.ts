@@ -7,7 +7,7 @@ import { ActivatedRoute  } from '@angular/router';
   styleUrls: ['./user-auth.component.css']
 })
 export class UserAuthComponent implements OnInit {
-  private isLogged: boolean = true;
+  private isLogged: boolean = false;
 
   constructor(private router: ActivatedRoute) { }
 

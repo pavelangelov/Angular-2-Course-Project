@@ -1,6 +1,15 @@
-<h1 class="col-sm-6">
-  <a routerLink="/">{{title}}</a>
-</h1>
-<user-auth></user-auth>
-<a routerLink="test-server" class="btn btn-success">Test</a>
-<router-outlet></router-outlet>
+<header class="col-sm-12">
+  <h1 class="col-sm-6">
+    <a routerLink="/">{{title}}</a>
+  </h1>
+  <user-auth></user-auth>
+  <div class="col-sm-offset-11">
+    <a routerLink="register">Registration</a>
+  </div>
+</header>
+<div class="for-test">
+  <a routerLink="test-server" class="btn btn-success">Test server response</a>
+</div>
+<div id="container" class="col-sm-10 col-sm-offset-1">
+  <router-outlet></router-outlet>
+</div>
