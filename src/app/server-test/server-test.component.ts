@@ -10,14 +10,15 @@ import 'rxjs/add/operator/map';
   styleUrls: ['./server-test.component.css']
 })
 export class ServerTestComponent implements OnInit {
-  private text: Observable<any>
+  private text: Observable<{}>
 
   constructor(private http: Http) {
-    this.text = this.http.get('api/test')
-      .map((response: Response) => response.json())
    }
 
   ngOnInit() {
+    this.text = this.http.get('api/test')
+      .map((response: Response) => {
+        return response.json();
+      });
   }
-
 }

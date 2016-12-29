@@ -1,12 +1,6 @@
 <h1 class="col-sm-6">
-  {{title}}
+  <a routerLink="/">{{title}}</a>
 </h1>
-<form action="user-control" method="POST" class="form-inline col-sm-6">
-  <label for="username">Username</label>
-  <input type="text" id="username" class="form-control">
-  <label for="password">Password</label>
-  <input type="text" id="password" class="form-control">
-  <input type="submit" class="btn btn-success" value="submit">
-</form>
+<user-auth></user-auth>
 <a routerLink="test-server" class="btn btn-success">Test</a>
 <router-outlet></router-outlet>

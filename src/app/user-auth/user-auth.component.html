@@ -1,8 +1,12 @@
-<p>
-  user-auth works!
-</p>
-
-<div>
-  <p>Username: {{username}}</p>
-  <p>Password: {{password}}</p>
+<div class="col-sm-6 user-control" [ngSwitch]="isLogged">
+  <div *ngSwitchCase="true">
+    <h2>Show usernam and Profile picture</h2>
+  </div>
+  <form *ngSwitchDefault action="user-control" method="POST" class="form-inline col-sm-12">
+    <label for="username">Username</label>
+    <input type="text" id="username" class="form-control">
+    <label for="password">Password</label>
+    <input type="text" id="password" class="form-control">
+    <input type="submit" class="btn btn-success" value="submit">
+  </form>
 </div>
