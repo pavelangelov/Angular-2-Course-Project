@@ -9,11 +9,13 @@ import { AppComponent } from './app.component';
 import { ServerTestComponent } from './server-test/server-test.component';
 import { UserAuthComponent } from './user-auth/user-auth.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { UserDetailsComponent } from './user-details/userdetails.component';
 
 const appRoutes: Routes = [
   { path: 'test-server', component: ServerTestComponent},
   { path: 'user-control', component: UserAuthComponent},
-  { path: 'register', component: RegistrationComponent}
+  { path: 'register', component: RegistrationComponent},
+  { path: 'user-details', component: UserDetailsComponent}
 ]
 
 
@@ -23,7 +25,8 @@ const appRoutes: Routes = [
     AppComponent,
     ServerTestComponent,
     UserAuthComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    UserDetailsComponent
   ],
   imports: [
     AlertModule,
