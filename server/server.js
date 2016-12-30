@@ -16,10 +16,17 @@ router.get("/test", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
+    let username = req.body.username,
+        password = req.body.password;
+    if (username.length < 3 || password.length < 3) {
+        res.send({error: 'Username and password must have more tha 2 symbols!'});
+        return;
+    }
+
     console.log(req.body);
     let user = {
         "auth_key": "Authentication key",
-        "username_key": req.body.username,
+        "username_key": username,
         "image_key": "https://pp.vk.me/c629327/v629327473/db66/r051joYFRX0.jpg",
         "success": true
     }
