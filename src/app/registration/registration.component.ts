@@ -8,7 +8,7 @@ import { ViewModel} from './registration-model';
 })
 export class RegistrationComponent implements OnInit {
   private model: ViewModel;
-  constructor() { 
+  constructor() {
     this.model = new ViewModel();
   }
 
@@ -19,8 +19,8 @@ export class RegistrationComponent implements OnInit {
     // validate input parameters
     //    if valid -> send to server and register new user
     //    else -> show error message
-    
-    console.log("Input parameters:");
+
+    console.log('Input parameters:');
     console.log(this.model);
   }
 }
