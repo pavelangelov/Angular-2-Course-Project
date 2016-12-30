@@ -23,7 +23,7 @@ router.post("/login", (req, res) => {
         return;
     }
 
-    console.log(req.body);
+    // TODO: update this with info for current user
     let user = {
         "auth_key": "Authentication key",
         "username_key": username,
@@ -31,9 +31,17 @@ router.post("/login", (req, res) => {
         "success": true
     }
 
-    // TODO: update this with info for current user
     res.status(200).send(user);
-})
+});
+
+router.post("/register", (req, res) => {
+    // TODO: update this with storing user in database
+    if (req.body.username.length > 2) {
+        res.send({success: true});
+    } else {
+        res.send({error: "Invalid registration parameters!"});
+    }
+});
 
 app.use("/api", router);
 

@@ -4,8 +4,17 @@ import { Http, Headers } from '@angular/http';
 @Injectable()
 export class UserService {
   private loggedIn = false;
+
   constructor(private http: Http) {
     this.loggedIn = !!localStorage.getItem('auth_key');
+  }
+
+  register(user: Object) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.post('api/register', JSON.stringify(user), { headers })
+      .map(res => res.json());
   }
 
   login(username, password) {
