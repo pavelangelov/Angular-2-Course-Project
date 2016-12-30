@@ -1,12 +1,17 @@
 <div class="col-sm-6 user-control" [ngSwitch]="isLogged">
-  <div *ngSwitchCase="true">
-    <h2>Show usernam and Profile picture</h2>
+  <div *ngSwitchCase="true" class="col-sm-offset-8">
+    <img src="{{image}}" alt="image" width="60" height="40">
+    <a href="">{{username}}</a>
+    <button class="btn btn-alert" (click)="logoutUser()">Logout</button>
   </div>
   <form *ngSwitchDefault action="user-control" method="POST" class="form-inline col-sm-12">
     <label for="username">Username</label>
-    <input type="text" id="username" class="form-control" required>
+    <input type="text" id="username"  #loginUsername class="form-control" required>
     <label for="password">Password</label>
-    <input type="text" id="password" class="form-control" required>
-    <button type="submit" class="btn btn-success">Log in</button>
+    <input type="text" id="password"  #loginPassword class="form-control" required>
+    <button type="submit" class="btn btn-success" (click)="loginUser(loginUsername.value, loginPassword.value)">Log in</button>
   </form>
+  <div class="col-sm-offset-11">
+    <a routerLink="register">Registration</a>
+  </div>
 </div>

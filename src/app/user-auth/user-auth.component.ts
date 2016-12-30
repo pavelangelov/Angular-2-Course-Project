@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute  } from '@angular/router';
+import { Router } from '@angular/router';
+
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'user-auth',
@@ -8,9 +10,29 @@ import { ActivatedRoute  } from '@angular/router';
 })
 export class UserAuthComponent implements OnInit {
   private isLogged: boolean = false;
+  private username: string;
+  private image: string;
 
-  constructor(private router: ActivatedRoute) { }
+  constructor(private router: Router, private userService: UserService) {
+  }
 
   ngOnInit() {
+    this.isLogged = this.userService.isLoggedIn();
+  }
+
+  loginUser(username: string, password: string) {
+    this.userService.login(username, password)
+        .subscribe((result) => {
+          if (result) {
+            this.username = localStorage.getItem('username_key');
+            this.image = localStorage.getItem('image_key');
+            this.isLogged = true;
+          }
+        });
+  }
+
+  logoutUser() {
+    this.isLogged = false;
+    this.userService.logout();
   }
 }
