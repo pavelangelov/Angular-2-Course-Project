@@ -44,7 +44,7 @@ export class UserAuthComponent implements OnInit {
           this.isLogged = true;
 
           this._service.success(
-            'User login',
+            'Login',
             'Success',
             {
               timeOut: 2000,
@@ -55,10 +55,10 @@ export class UserAuthComponent implements OnInit {
             });
         } else {
           this._service.error(
-            'User login',
+            'Login error',
             result.error,
             {
-              timeOut: 2000,
+              timeOut: 3000,
               showProgressBar: true,
               pauseOnHover: false,
               clickToClose: false

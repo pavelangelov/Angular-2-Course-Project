@@ -13,20 +13,18 @@ export class UserService {
     headers.append('Content-Type', 'application/json');
 
     return this.http.post('api/login', JSON.stringify({ username, password }), { headers })
-              .map(res => res.json())
-              .map((res) => {
-                console.log(res);
-                if (res.success) {
-                  localStorage.setItem('auth_key', res.auth_key);
-                  localStorage.setItem('username_key', res.username_key);
-                  localStorage.setItem('image_key', res.image_key);
-                  this.loggedIn = true;
-                } else {
-                  return res;
-                }
+      .map(res => res.json())
+      .map((res) => {
+        console.log(res);
+        if (res.success) {
+          localStorage.setItem('auth_key', res.auth_key);
+          localStorage.setItem('username_key', res.username_key);
+          localStorage.setItem('image_key', res.image_key);
+          this.loggedIn = true;
+        }
 
-                return res;
-              });
+        return res;
+      });
   }
 
   logout() {
