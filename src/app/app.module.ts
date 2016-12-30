@@ -16,9 +16,7 @@ const appRoutes: Routes = [
   { path: 'user-control', component: UserAuthComponent},
   { path: 'register', component: RegistrationComponent},
   { path: 'user-details', component: UserDetailsComponent}
-]
-
-
+];
 
 @NgModule({
   declarations: [

@@ -1,7 +1,8 @@
 {
   "name": "test-project",
   "version": "0.0.0",
-  "license": "MIT","engines": {
+  "license": "MIT",
+  "engines": {
     "node": "7.2.0"
   },
   "angular-cli": {},
@@ -28,6 +29,9 @@
     "@angular/platform-browser-dynamic": "^2.3.1",
     "@angular/router": "^3.3.1",
     "angular-cli": "^1.0.0-beta.24",
+    "@angular/compiler-cli": "^2.3.1",
+    "@types/jasmine": "2.5.38",
+    "@types/node": "^6.0.42",
     "body-parser": "^1.15.2",
     "bootstrap": "^3.3.7",
     "cookie-parser": "^1.4.3",
