@@ -20,8 +20,6 @@ const appRoutes: Routes = [
   { path: 'login', component: UserHomeComponent}
 ]
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
