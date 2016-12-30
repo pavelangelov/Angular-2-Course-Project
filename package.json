@@ -11,7 +11,6 @@
     "start": "npm run serve-build-prod",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
-    "postinstall": "npm run server-build",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
     "e2e": "protractor",
     "build:nodeserver": "ng build && cp server/* dist",
