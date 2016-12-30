@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { AlertModule } from 'ng2-bootstrap';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 import { AppComponent } from './app.component';
 import { ServerTestComponent } from './server-test/server-test.component';
@@ -30,6 +31,7 @@ const appRoutes: Routes = [
     UserHomeComponent
   ],
   imports: [
+    SimpleNotificationsModule,
     AlertModule,
     BrowserModule,
     FormsModule,
