@@ -20,9 +20,10 @@ export class UserService {
                   localStorage.setItem('username_key', res.username_key);
                   localStorage.setItem('image_key', res.image_key);
                   this.loggedIn = true;
+
                 }
 
-                return res.success;
+                return res.success.redirect('login');
               });
   }
 
