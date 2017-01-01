@@ -1,7 +1,8 @@
 "use strict";
 
 let User = require("./models").User,
-    fakeDb = require("./fakeDatas");
+    fakeDb = require("./fakeDatas"),
+    defaultUserImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSgOuWYgW80emzlSY5lFG5wa9EeyuCO7p8I37N-O8tglniEVs1eE1SxJI";
 
 module.exports = {
     createUser(user) {
@@ -14,9 +15,10 @@ module.exports = {
             lastname: user.lastname,
             fullname: `${user.firstname} ${user.lastname}`,
             password: user.password,
-            image: defaultUserImage,
-            telerikAccount: user.telerikAccount,
-            githubAccount: user.telerikAccount,
+            authKey: user.authKey,
+            profileImage: defaultUserImage,
+            images: [],
+            isOnline: false,
             unreadMessages: 0,
             requests: [],
             friends: []
@@ -30,6 +32,40 @@ module.exports = {
             });
         });
     },
+    login(username, password) {
+        return new Promise((resolve, reject) => {
+            User.findOneAndUpdate(
+                { "username": username, "password": password},
+                { "isOnline": true},
+                { save: true },
+                (err, user) => {
+                    if (err) {
+                        return reject(err);
+                    } else if (!user) {
+                        return reject({ message:"Incorect username or password!" });
+                    }
+
+                    return resolve(user);
+                }
+            )
+        })
+    },
+    logout(username) {
+        return new Promise((resolve, reject) => {
+            User.findOneAndUpdate(
+                { "username": username },
+                { "isOnline": false},
+                { save: true},
+                (err, data) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve(data || null);
+                }
+            )
+        })
+    },
     updateUser(user, firstName, lastName, userInfo) {
         firstName = firstName || user.firstname;
         lastName = lastName || user.lastname;
@@ -39,7 +75,13 @@ module.exports = {
         // validator.validateName(lastName);
 
         return new Promise((resolve, reject) => {
-            User.findOneAndUpdate({ "_id": user._id }, { "firstname": firstName, "lastname": lastName, "userInfo": userInfo }, { save: true },
+            User.findOneAndUpdate(
+                { "_id": user._id }, 
+                { "firstname": firstName, 
+                    "lastname": lastName, 
+                    "userInfo": userInfo 
+                }, 
+                { save: true },
                 (err, user1) => {
                     if (err) {
                         return reject(err);
@@ -48,24 +90,43 @@ module.exports = {
                 });
         });
     },
-    updateUserImage(userId, imageUrl) {
+    addImage(userId, imgUrl) {
         return new Promise((resolve, reject) => {
-            User.findOneAndUpdate({ "_id": userId },
-                { "image": imageUrl },
+            User.findOneAndUpdate(
+                { "_id": userId},
+                { $push: { "images": imgUrl } },
                 { save: true },
+                (err, data) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve(data || null);
+                }
+            )
+        })
+    },
+    setProfileImage(userId, imgUrl) {
+        return new Promise((resolve, reject) => {
+            User.findOneAndUpdate(
+                { "_id": userId },
+                { "profileImage": imgUrl},
                 (err, user) => {
                     if (err) {
                         return reject(err);
                     }
 
                     return resolve(user || null);
-
-                });
-        });
+                }
+            )
+        })
     },
     sendRequest(username, request) {
         return new Promise((resolve, reject) => {
-            User.findOneAndUpdate({ "username": username }, { $push: { "requests": request } },
+            User.findOneAndUpdate(
+                { "username": username }, 
+                { $push: { "requests": request } },
+                { save: true },
                 (err, dbReq) => {
                     if (err) {
                         return reject(err);
@@ -76,7 +137,10 @@ module.exports = {
     },
     addFriend(username, friend) {
         return new Promise((resolve, reject) => {
-            User.findOneAndUpdate({ "username": username }, { $push: { "friends": friend } },
+            User.findOneAndUpdate(
+                { "username": username }, 
+                { $push: { "friends": friend } },
+                { save: true },
                 (err, user) => {
                     if (err) {
                         return reject(err);
@@ -89,7 +153,10 @@ module.exports = {
     },
     removeRequest(username, requestId) {
         return new Promise((resolve, reject) => {
-            User.findOneAndUpdate({ "username": username }, { $pull: { "requests": { "_id": requestId } } }, { safe: true },
+            User.findOneAndUpdate(
+                { "username": username }, 
+                { $pull: { "requests": { "_id": requestId } } }, 
+                { safe: true },
                 (err, user) => {
                     if (err) {
                         return reject(err);

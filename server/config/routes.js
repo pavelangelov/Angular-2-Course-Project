@@ -16,23 +16,47 @@ router.post("/login", (req, res) => {
     }
 
     // TODO: update this with info for current user
-    let user = {
-        "auth_key": "Authentication key",
-        "username_key": username,
-        "image_key": "https://pp.vk.me/c629327/v629327473/db66/r051joYFRX0.jpg",
-        "success": true
-    }
+    data.users.login(username, password)
+        .then(user => {
+            res.send({
+                success: true,
+                username: user.username,
+                image: user.profileImage,
+                authKey: user.authKey
+            })
+        })
+        .catch(err => res.send({error: err.message}));
+});
 
-    res.status(200).send(user);
+router.post("/logout", (req, res) => {
+    data.users.logout(req.body.username)
+        .then(data => {
+            res.send({ success: true})
+            .catch(err => res.send({ error: err.message}));
+        })
 });
 
 router.post("/register", (req, res) => {
     // TODO: update this with storing user in database
-    if (req.body.username.length > 2) {
-        res.send({success: true});
-    } else {
-        res.send({error: "Invalid registration parameters!"});
+    
+    // if (req.body.username.length > 2) {
+    //     res.send({success: true});
+    // } else {
+    //     res.send({error: "Invalid registration parameters!"});
+    // }
+
+    let user = {
+        username: req.body.username,
+        password: req.body.password,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        authKey: 'authKey', // TODO: Update this with real auth-key
     }
+    data.users.createUser(user)
+        .then(user => {
+            res.send({ success: true });
+        })
+        .catch(err => res.send({ error: err.message }));
 });
     
     app.use("/api", router);

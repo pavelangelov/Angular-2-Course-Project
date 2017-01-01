@@ -75,7 +75,11 @@ export class UserAuthComponent implements OnInit {
 
   logoutUser() {
     this.isLogged = false;
-    this.userService.logout();
+    this.userService.logout()
+      .subscribe((res) => {
+        console.log("Result");
+        console.log(res);
+      });
     this.router.navigate(['home']);
   }
 }

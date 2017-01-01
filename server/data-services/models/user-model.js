@@ -14,6 +14,10 @@ let userSchema = new Schema({
         type: String,
         required: true
     },
+    authKey: {
+        type: String,
+        required: true
+    },
     firstname: {
         type: String,
         required: true
@@ -24,9 +28,9 @@ let userSchema = new Schema({
     },
     fullname: { type: String },
     userInfo: { type: String },
-    image: { type: String },
-    telerikAccount: { type: String },
-    githubAccount: { type: String },
+    profileImage: { type: String },
+    images: [String],
+    isOnline: { type: Boolean},
     unreadMessages: { type: Number },
     requests: [
         {

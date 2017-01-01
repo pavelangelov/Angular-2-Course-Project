@@ -12,6 +12,4 @@ module.exports = (config, app) => {
     let secretKey = process.env["SECRET_KEY"] || config.development.secret;
 
     app.use(express.static(path.normalize(config.path.rootPath, '/')));
-    console.log(path.normalize(__dirname, '/../'));
-    console.log(config.path.rootPath);
 };
