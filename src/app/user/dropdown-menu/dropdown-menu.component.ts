@@ -9,6 +9,7 @@ export class DropdownMenuComponent implements OnInit {
   private values = [
     { label: 'Friends', href: 'friends' },
     { label: 'Messages', href: 'messages' },
+    { label: 'Galley', href: 'gallery'},
     { label: 'Profile', href: 'profile' },
     { label: 'Search friends', href: '/search' }
   ];
