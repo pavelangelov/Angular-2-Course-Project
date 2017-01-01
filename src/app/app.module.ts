@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
-import { AlertModule } from 'ng2-bootstrap';
+import { AlertModule, DropdownModule } from 'ng2-bootstrap';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 
 import { AppComponent } from './app.component';
@@ -18,7 +19,7 @@ const appRoutes: Routes = [
   { path: 'user-control', component: UserAuthComponent},
   { path: 'register', component: RegistrationComponent},
   { path: 'user-details', component: UserDetailsComponent},
-  { path: 'login', component: UserHomeComponent}
+  { path: 'home', component: UserHomeComponent}
 ]
 
 @NgModule({
@@ -31,11 +32,13 @@ const appRoutes: Routes = [
     UserHomeComponent
   ],
   imports: [
+    CommonModule,
     SimpleNotificationsModule,
     AlertModule,
     BrowserModule,
     FormsModule,
     HttpModule,
+    DropdownModule.forRoot(),
     RouterModule.forRoot(appRoutes,{
     useHash: true
   })

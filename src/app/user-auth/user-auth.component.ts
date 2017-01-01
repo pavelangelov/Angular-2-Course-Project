@@ -53,6 +53,7 @@ export class UserAuthComponent implements OnInit {
               clickToClose: false,
               maxLength: 10
             });
+            this.router.navigate(['home']);
         } else {
           this._service.error(
             'Login error',

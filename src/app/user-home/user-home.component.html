@@ -1,7 +1,12 @@
-<div class="col-sm-6 user-control" [ngSwitch]="isLogged">
-    <div *ngSwitchCase="true" class="col-sm-offset-8">
-        <img src="{{image}}" alt="image" width="60" height="40">
-        <a href="">{{username}}</a>
-        <button class="btn btn-alert" (click)="logoutUser()">Logout</button>
+<div (click)="$event.preventDefault()">
+    <div class="btn-group" dropdown [isOpen]="status.isopen">
+        <button id="single-button" type="button" class="btn btn-primary" dropdownToggle [disabled]="disabled">
+      Menu <span class="caret"></span>
+    </button>
+        <ul dropdownMenu role="menu" aria-labelledby="single-button">
+            <li *ngFor="let value of values"  role="menuitem" (click)="selectItem(value.value)">
+                <a routerLink="{{value.href}}" class="dropdown-item">{{value.label}}</a>
+            </li>
+        </ul>
     </div>
 </div>
