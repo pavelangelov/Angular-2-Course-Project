@@ -10,6 +10,7 @@ module.exports = (app, data) => {
 router.post("/login", (req, res) => {
     let username = req.body.username,
         password = req.body.password;
+    // TODO: create real validation
     if (username.length < 3 || password.length < 3) {
         res.send({error: 'Username and password must have more tha 2 symbols!'});
         return;
@@ -37,14 +38,6 @@ router.post("/logout", (req, res) => {
 });
 
 router.post("/register", (req, res) => {
-    // TODO: update this with storing user in database
-    
-    // if (req.body.username.length > 2) {
-    //     res.send({success: true});
-    // } else {
-    //     res.send({error: "Invalid registration parameters!"});
-    // }
-
     let user = {
         username: req.body.username,
         password: req.body.password,
@@ -52,6 +45,7 @@ router.post("/register", (req, res) => {
         lastname: req.body.lastname,
         authKey: 'authKey', // TODO: Update this with real auth-key
     }
+    // TODO: validate data before send to database
     data.users.createUser(user)
         .then(user => {
             res.send({ success: true });
