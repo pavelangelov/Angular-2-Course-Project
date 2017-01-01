@@ -5,7 +5,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { UserService } from '../user.service';
 
 @Component({
-  selector: 'user-auth',
+  selector: 'app-user-auth',
   templateUrl: './user-auth.component.html',
   styleUrls: ['./user-auth.component.css']
 })
@@ -48,27 +48,11 @@ export class UserAuthComponent implements OnInit {
           this.image = localStorage.getItem('image_key');
           this.isLogged = true;
 
-          this._service.success(
-            'Login',
-            'Success',
-            {
-              timeOut: 2000,
-              showProgressBar: true,
-              pauseOnHover: false,
-              clickToClose: false,
-              maxLength: 10
-            });
+          this.showSuccess('Login', 'Success');
+
           this.router.navigate(['user']);
         } else {
-          this._service.error(
-            'Login error',
-            result.error,
-            {
-              timeOut: 3000,
-              showProgressBar: true,
-              pauseOnHover: false,
-              clickToClose: false
-            });
+          this.showError('Login error', result.error);
         }
       });
   }
@@ -77,8 +61,36 @@ export class UserAuthComponent implements OnInit {
     this.isLogged = false;
     this.userService.logout()
       .subscribe((res) => {
+        if (res && res.error) {
+          this.showError('Logout error', res.error);
+        }
         console.log(res);
       });
     this.router.navigate(['home']);
+  }
+
+  showSuccess(title: string, content: string) {
+    this._service.success(
+      title,
+      content,
+      {
+        timeOut: 2000,
+        showProgressBar: true,
+        pauseOnHover: false,
+        clickToClose: false,
+        maxLength: 10
+      });
+  }
+
+  showError(title: string, content: string) {
+    this._service.error(
+      title,
+      content,
+      {
+        timeOut: 3000,
+        showProgressBar: true,
+        pauseOnHover: false,
+        clickToClose: false
+      });
   }
 }

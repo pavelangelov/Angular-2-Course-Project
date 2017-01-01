@@ -33,8 +33,8 @@ router.post("/logout", (req, res) => {
     data.users.logout(req.body.username)
         .then(data => {
             res.send({ success: true})
-            .catch(err => res.send({ error: err.message}));
         })
+        .catch(err => res.send({ error: err.message}));
 });
 
 router.post("/register", (req, res) => {
