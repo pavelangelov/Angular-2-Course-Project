@@ -11,7 +11,7 @@ export class UserHomeComponent {
     { label: 'Friends', href: 'friends' },
     { label: 'Messages', href: 'messages' },
     { label: 'Profile', href: 'profile' },
-    { label: 'Search friends', href: 'search' }
+    { label: 'Search friends', href: '/search' }
   ];
 
   public disabled: boolean = false;

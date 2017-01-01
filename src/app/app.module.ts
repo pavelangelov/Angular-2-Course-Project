@@ -14,16 +14,22 @@ import { UserProfileComponent } from './user/user-profile/user-profile.component
 import { UserHomeComponent } from './user/user-home/user-home.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { UserMessagesComponent } from './user/user-messages/user-messages.component';
+import { UserFriendsComponent } from './user/user-friends/user-friends.component';
+import { SearchFriendsComponent } from './search-friends/search-friends.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home'},
   { path: 'home', component: HomeComponent },
   { path: 'register', component: RegistrationComponent },
+  { path: 'search', component: SearchFriendsComponent},
   {
     path: 'user',
     component: UserHomeComponent,
     children: [
-      { path: 'profile', component: UserProfileComponent }
+      { path: 'profile', component: UserProfileComponent },
+      { path: 'messages', component: UserMessagesComponent},
+      { path: 'friends', component: UserFriendsComponent}
     ]
   },
   { path: '**', component: NotFoundComponent}
@@ -37,7 +43,10 @@ const appRoutes: Routes = [
     UserProfileComponent,
     UserHomeComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    UserMessagesComponent,
+    UserFriendsComponent,
+    SearchFriendsComponent
   ],
   imports: [
     CommonModule,

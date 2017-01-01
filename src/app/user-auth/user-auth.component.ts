@@ -15,24 +15,29 @@ export class UserAuthComponent implements OnInit {
   private image: string;
 
   public options = {
-        timeOut: 5000,
-        lastOnBottom: true,
-        clickToClose: true,
-        maxStack: 7,
-        showProgressBar: true,
-        pauseOnHover: true,
-        preventDuplicates: false,
-        preventLastDuplicates: 'visible',
-        rtl: false,
-        animate: 'scale',
-        position: ['right', 'bottom']
-    };
+    timeOut: 5000,
+    lastOnBottom: true,
+    clickToClose: true,
+    maxStack: 7,
+    showProgressBar: true,
+    pauseOnHover: true,
+    preventDuplicates: false,
+    preventLastDuplicates: 'visible',
+    rtl: false,
+    animate: 'scale',
+    position: ['right', 'bottom']
+  };
 
   constructor(private router: Router, private userService: UserService, private _service: NotificationsService) {
   }
 
   ngOnInit() {
     this.isLogged = this.userService.isLoggedIn();
+    if (this.isLogged) {
+      this.username = localStorage.getItem('username_key');
+      this.image = localStorage.getItem('image_key');
+      this.isLogged = true;
+    }
   }
 
   loginUser(username: string, password: string) {
@@ -53,7 +58,7 @@ export class UserAuthComponent implements OnInit {
               clickToClose: false,
               maxLength: 10
             });
-            this.router.navigate(['user']);
+          this.router.navigate(['user']);
         } else {
           this._service.error(
             'Login error',
