@@ -19,6 +19,7 @@ import { UserFriendsComponent } from './user/user-friends/user-friends.component
 import { SearchFriendsComponent } from './search-friends/search-friends.component';
 import { DropdownMenuComponent } from './user/dropdown-menu/dropdown-menu.component';
 import { UserGalleryComponent } from './user/user-gallery/user-gallery.component';
+import { UserPostsComponent } from './user/user-posts/user-posts.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home'},
@@ -29,6 +30,7 @@ const appRoutes: Routes = [
     path: 'user',
     component: UserHomeComponent,
     children: [
+      { path: 'home', component: UserPostsComponent},
       { path: 'profile', component: UserProfileComponent },
       { path: 'messages', component: UserMessagesComponent},
       { path: 'friends', component: UserFriendsComponent},
@@ -51,7 +53,8 @@ const appRoutes: Routes = [
     UserFriendsComponent,
     SearchFriendsComponent,
     DropdownMenuComponent,
-    UserGalleryComponent
+    UserGalleryComponent,
+    UserPostsComponent
   ],
   imports: [
     CommonModule,
