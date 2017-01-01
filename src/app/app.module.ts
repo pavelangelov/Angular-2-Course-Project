@@ -17,6 +17,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { UserMessagesComponent } from './user/user-messages/user-messages.component';
 import { UserFriendsComponent } from './user/user-friends/user-friends.component';
 import { SearchFriendsComponent } from './search-friends/search-friends.component';
+import { DropdownMenuComponent } from './user/dropdown-menu/dropdown-menu.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home'},
@@ -46,7 +47,8 @@ const appRoutes: Routes = [
     NotFoundComponent,
     UserMessagesComponent,
     UserFriendsComponent,
-    SearchFriendsComponent
+    SearchFriendsComponent,
+    DropdownMenuComponent
   ],
   imports: [
     CommonModule,
