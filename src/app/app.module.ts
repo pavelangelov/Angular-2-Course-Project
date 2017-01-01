@@ -8,28 +8,36 @@ import { AlertModule, DropdownModule } from 'ng2-bootstrap';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 
 import { AppComponent } from './app.component';
-import { ServerTestComponent } from './server-test/server-test.component';
 import { UserAuthComponent } from './user-auth/user-auth.component';
 import { RegistrationComponent } from './registration/registration.component';
-import { UserDetailsComponent } from './user-details/userdetails.component';
-import { UserHomeComponent } from './user-home/user-home.component';
+import { UserProfileComponent } from './user/user-profile/user-profile.component';
+import { UserHomeComponent } from './user/user-home/user-home.component';
+import { HomeComponent } from './home/home.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const appRoutes: Routes = [
-  { path: 'test-server', component: ServerTestComponent},
-  { path: 'user-control', component: UserAuthComponent},
-  { path: 'register', component: RegistrationComponent},
-  { path: 'user-details', component: UserDetailsComponent},
-  { path: 'home', component: UserHomeComponent}
-]
+  { path: '', pathMatch: 'full', redirectTo: 'home'},
+  { path: 'home', component: HomeComponent },
+  { path: 'register', component: RegistrationComponent },
+  {
+    path: 'user',
+    component: UserHomeComponent,
+    children: [
+      { path: 'profile', component: UserProfileComponent }
+    ]
+  },
+  { path: '**', component: NotFoundComponent}
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    ServerTestComponent,
     UserAuthComponent,
     RegistrationComponent,
-    UserDetailsComponent,
-    UserHomeComponent
+    UserProfileComponent,
+    UserHomeComponent,
+    HomeComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,
@@ -39,9 +47,9 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule,
     DropdownModule.forRoot(),
-    RouterModule.forRoot(appRoutes,{
-    useHash: true
-  })
+    RouterModule.forRoot(appRoutes, {
+      useHash: true
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

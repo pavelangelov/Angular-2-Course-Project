@@ -53,7 +53,7 @@ export class UserAuthComponent implements OnInit {
               clickToClose: false,
               maxLength: 10
             });
-            this.router.navigate(['home']);
+            this.router.navigate(['user']);
         } else {
           this._service.error(
             'Login error',
@@ -71,5 +71,6 @@ export class UserAuthComponent implements OnInit {
   logoutUser() {
     this.isLogged = false;
     this.userService.logout();
+    this.router.navigate(['home']);
   }
 }

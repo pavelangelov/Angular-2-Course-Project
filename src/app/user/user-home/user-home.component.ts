@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ViewModel } from '../registration/registration-model';
+import { ViewModel } from '../../registration/registration-model';
 
 @Component({
   templateUrl: './user-home.component.html',
@@ -16,8 +16,6 @@ export class UserHomeComponent {
 
   public disabled: boolean = false;
   public status: { isopen: boolean } = { isopen: false };
-  public items: string[] = ['The first choice!',
-    'And another choice for you.', 'but wait! A third!'];
 
   public toggled(open: boolean): void {
     console.log('Dropdown is now: ', open);
