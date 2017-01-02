@@ -166,6 +166,20 @@ module.exports = {
                 });
         });
     },
+    getUsersByUsername(username) {
+        return new Promise((resolve, reject) => {
+            User.find(
+                { "username": { "$regex": username, "$options": "i" } },
+                (err, data) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve(data);
+                }
+            )
+        });
+    },
     getFiltredUsersByPartOfFullname(value) {
         // value = validator.escapeBadSymbols(value);
         return new Promise((resolve, reject) => {

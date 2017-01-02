@@ -43,5 +43,12 @@ module.exports = (router, data) => {
                 res.send({ success: true });
             })
             .catch(err => res.send({ error: err.message }));
+    })
+    .get("/users/:username", (req, res) => {
+        let username = req.params.username;
+
+        data.users.getUsersByUsername(username)
+            .then(data => res.send({ success: true, result: data }))
+            .catch(err => res.send({ error: err.message }));
     });
 }

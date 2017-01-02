@@ -55,6 +55,13 @@ export class UserService {
       });
   }
 
+  findUsers(username: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(`api/users/${username}`, { headers })
+      .map(res => res.json());
+  }
+
   isLoggedIn(): boolean {
     return this.loggedIn;
   }

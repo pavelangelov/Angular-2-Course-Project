@@ -1,14 +1,17 @@
 <form class="form-group col-sm-9">
   <label for="searched-username">Enter username</label>
-  <input type="text" class="form-control">
+  <input type="text" #search class="form-control" (keyup)="searchPeople(search.value)">
 </form>
 
 <h3 class="col-sm-12">Results:</h3>
-<ul class="results col-sm-10">
-  <li *ngFor="let user of users">
+<ul class="results col-sm-10 list-group">
+  <li *ngFor="let user of users" class="list-group-item col-sm-6">
     <div class="user">
-      <img src="{{user?.image}}" alt="">
-      <h4><a href="">{{user?.username}}</a></h4>
+      <img src="{{user?.profileImage}}" alt="image" class="col-sm-3">
+      <div class="col-sm-9">
+        <h4> Username: <a href="">{{user?.username}}</a></h4>
+        <h4> Name: {{user?.fullname}}</h4>
+      </div>
     </div>
   </li>
 </ul>
