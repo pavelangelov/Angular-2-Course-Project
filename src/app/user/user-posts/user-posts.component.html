@@ -23,7 +23,14 @@
     </div>
     <div class="list-group-item-text">
       <p>{{post?.content}}</p>
-      <p class="bottom-align-text text-right">Posted on: {{post?.postDate}}</p>
+      <div>
+        <span [ngSwitch]="post.isLiked">
+          <button *ngSwitchCase="true" class="btn btn-warning" data-id="{{post._id}}" (click)="dislike($event)">Dislike</button>
+          <button *ngSwitchDefault  class="btn btn-primary" data-id="{{post._id}}" (click)="like($event)">Like</button>
+        </span>
+        <span class="likes-count">Likes {{post?.likes}}</span>
+        <span class="post-date">Posted on: {{post?.postDate}}</span>
+      </div>
     </div>
   </li>
 </ul>

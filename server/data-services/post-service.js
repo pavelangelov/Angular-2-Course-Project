@@ -61,13 +61,13 @@ module.exports = {
                 });
         });
     },
-    decreaseLikes(postId, userId) {
+    decreaseLikes(postId, username) {
         return new Promise((resolve, reject) => {
             Post.findOneAndUpdate({ "_id": postId },
                 {
                     $inc: { "likes": -1 },
-                    $push: { "dislikesFrom": userId },
-                    $pull: { "likesFrom": userId }
+                    $push: { "dislikesFrom": username },
+                    $pull: { "likesFrom": username }
                 },
                 (err, post) => {
                     if (err) {

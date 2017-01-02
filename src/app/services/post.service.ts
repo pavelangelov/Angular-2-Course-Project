@@ -32,4 +32,24 @@ export class PostService {
     return this.http.get('api/posts', {headers})
       .map(res => res.json());
   }
+
+  increaseLikes(postId: string, username: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.post('api/post/increase-likes',
+                  JSON.stringify({postId, username}),
+                  { headers })
+                .map(res => res.json());
+  }
+
+  decreaseLikes(postId: string, username: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.post('api/post/decrease-likes',
+                  JSON.stringify({postId, username}),
+                  { headers })
+                .map(res => res.json());
+  }
 }
