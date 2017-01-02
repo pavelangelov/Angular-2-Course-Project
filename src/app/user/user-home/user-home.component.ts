@@ -12,6 +12,10 @@ export class UserHomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.router.navigate(['/user/home']);
+    if (!localStorage.getItem('username_key')) {
+      this.router.navigate(['/home']);
+    } else {
+      this.router.navigate(['/user/home']);
+    }
   }
 }

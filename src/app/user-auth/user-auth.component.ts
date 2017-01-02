@@ -28,6 +28,8 @@ export class UserAuthComponent implements OnInit {
       this.username = localStorage.getItem('username_key');
       this.image = localStorage.getItem('image_key');
       this.isLogged = true;
+    } else {
+      this.router.navigate(['/home']);
     }
   }
 
