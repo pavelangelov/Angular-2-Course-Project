@@ -1,0 +1,12 @@
+<h3 class="col-sm-9 col-sm-offset-2">
+  Post something on your wall
+</h3>
+<form class="col-sm-8 col-sm-offset-2">
+  <textarea name="post-content" [(ngModel)]="postContent" cols="15" rows="5" placeholder="Write something..." class="form-control">
+  </textarea>
+  <button class="btn btn-success" (click)="createPost()">Greate</button>
+</form>
+
+<ul class="posts col-sm-11">
+  
+</ul>

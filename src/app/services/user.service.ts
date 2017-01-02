@@ -25,9 +25,9 @@ export class UserService {
       .map(res => res.json())
       .map((res) => {
         if (res.success) {
-          localStorage.setItem('auth_key', res.auth_key);
-          localStorage.setItem('username_key', res.username_key);
-          localStorage.setItem('image_key', res.image_key);
+          localStorage.setItem('auth_key', res.authKey);
+          localStorage.setItem('username_key', res.username);
+          localStorage.setItem('image_key', res.image);
           this.loggedIn = true;
         }
 
@@ -36,10 +36,23 @@ export class UserService {
   }
 
   logout() {
+    let username = localStorage.getItem('username_key');
     localStorage.removeItem('auth_key');
     localStorage.removeItem('username_key');
     localStorage.removeItem('image_key');
     this.loggedIn = false;
+
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('api/logout', JSON.stringify({ username }), { headers })
+      .map(res => res.json())
+      .map(res => {
+        if (res.success) {
+          return null;
+        }
+
+        return res;
+      });
   }
 
   isLoggedIn(): boolean {
