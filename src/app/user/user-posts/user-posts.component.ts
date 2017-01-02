@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
-import {} from 'rxjs/add/operator/map';
+import { Observable, Observer  } from 'rxjs/Rx';
+import { } from 'rxjs/add/operator/map';
 
 import { Notificator } from '../../utils/';
 import { PostService } from '../../services/';
@@ -12,13 +12,21 @@ import { PostService } from '../../services/';
 })
 export class UserPostsComponent implements OnInit {
   private postContent: string;
-  private posts: Observable<{}>;
+  private posts: [{}];
+
   constructor(private service: PostService, private notificator: Notificator) { }
 
   ngOnInit() {
-    // let username = localStorage.getItem('username_key');
-    // this.service.getPosts(username)
-    //   .map()
+    let username = localStorage.getItem('username_key');
+    this.service.getPosts(username)
+      .subscribe(res => {
+        if (res.error) {
+          this.notificator.showError('Posts error', res.error);
+          this.posts = [{}];
+        } else {
+         this.posts = res.result;
+        }
+      });
   }
 
   createPost() {
@@ -31,6 +39,7 @@ export class UserPostsComponent implements OnInit {
     this.service.createPost(username, this.postContent)
       .subscribe(res => {
         if (res.success) {
+          this.posts.push(res.post);
           this.notificator.showSuccess('Post created', 'Successfully');
         } else if (res.error) {
           this.notificator.showError('Create post error', res.error);
