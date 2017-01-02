@@ -1,0 +1,12 @@
+.posts {
+    margin-top: 10px;
+}
+
+.list-group-item-heading {
+    border-bottom: 1px solid #ccc;
+}
+
+.post {
+    margin-top: 8px;
+    box-shadow: 5px 5px 5px #ccc;
+}
