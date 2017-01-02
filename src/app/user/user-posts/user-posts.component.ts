@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {} from 'rx'
+import { Observable } from 'rxjs/Rx';
+import {} from 'rxjs/add/operator/map';
 
 import { Notificator } from '../../utils/';
 import { PostService } from '../../services/';
@@ -17,6 +18,7 @@ export class UserPostsComponent implements OnInit {
   ngOnInit() {
     // let username = localStorage.getItem('username_key');
     // this.service.getPosts(username)
+    //   .map()
   }
 
   createPost() {
@@ -35,6 +37,6 @@ export class UserPostsComponent implements OnInit {
         } else {
           this.notificator.showError('Server is busy', 'Try again later');
         }
-      })
+      });
   }
 }
