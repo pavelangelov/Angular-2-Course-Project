@@ -53,10 +53,19 @@ router.post("/register", (req, res) => {
         .catch(err => res.send({ error: err.message }));
 });
 
+router.get("/posts", (req, res) => {
+    let username = req.headers["x-username"];
+    data.posts.getPostsByUsername(username)
+        .then(posts => {
+            res.send({ success: true, result: posts });
+        })
+        .catch(err => res.send({ error: err.message }))
+});
+
 router.post("/post", (req, res) => {
     data.posts.createPost(req.body)
         .then(data => {
-            res.send({ success: true});
+            res.send({ success: true, post: data});
         })
         .catch(err => res.send({ error: err.message }));
 })

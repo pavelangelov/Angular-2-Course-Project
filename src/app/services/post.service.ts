@@ -24,4 +24,12 @@ export class PostService {
               .map(res => res.json());
   }
 
+  getPosts(username: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('x-username', username);
+
+    return this.http.get('api/posts', {headers})
+      .map(res => res.json());
+  }
 }
