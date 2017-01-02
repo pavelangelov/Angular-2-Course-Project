@@ -6,9 +6,7 @@ module.exports = {
     createPost(postLikeObj) {
         let post = new Post({
             author: postLikeObj.author,
-            authorId: postLikeObj.authorId,
             targetUser: postLikeObj.targetUser,
-            targetUserId: postLikeObj.targetUserId,
             image: postLikeObj.image,
             postDate: postLikeObj.postDate,
             likes: 0,
@@ -36,9 +34,9 @@ module.exports = {
             });
         });
     },
-    getPostsByUserId(userId) {
+    getPostsByUsername(username) {
         return new Promise((resolve, reject) => {
-            Post.find({ $or: [{ "authorId": userId }, { "targetUserId": userId }] }, (err, posts) => {
+            Post.find({ $or: [{ "author": username }, { "targetUser": username }] }, (err, posts) => {
                 if (err) {
                     return reject(err);
                 }
@@ -46,13 +44,13 @@ module.exports = {
             });
         });
     },
-    increaseLikes(postId, userId) {
+    increaseLikes(postId, username) {
         return new Promise((resolve, reject) => {
             Post.findOneAndUpdate({ "_id": postId },
                 {
                     $inc: { "likes": 1 },
-                    $push: { "likesFrom": userId },
-                    $pull: { "dislikesFrom": userId }
+                    $push: { "likesFrom": username },
+                    $pull: { "dislikesFrom": username }
                 },
                 (err, post) => {
                     if (err) {

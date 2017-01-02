@@ -8,17 +8,8 @@ let postSchema = new Schema({
         type: String,
         required: true
     },
-    authorId: {
-        type: String,
-        required: true
-    },
     targetUser: {
-        type: String,
-        required: true
-    },
-    targetUserId: {
-        type: String,
-        required: true
+        type: String
     },
     image: {
         type: String,

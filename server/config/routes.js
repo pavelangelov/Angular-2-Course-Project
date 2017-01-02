@@ -52,6 +52,14 @@ router.post("/register", (req, res) => {
         })
         .catch(err => res.send({ error: err.message }));
 });
+
+router.post("/post", (req, res) => {
+    data.posts.createPost(req.body)
+        .then(data => {
+            res.send({ success: true});
+        })
+        .catch(err => res.send({ error: err.message }));
+})
     
     app.use("/api", router);
 };
