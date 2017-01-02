@@ -35,6 +35,13 @@ export class UserService {
       });
   }
 
+  getUserByUserName(username){
+    let path = 'api/users/'+ username;
+
+    return this.http.get(path)
+      .map(res => res.json());
+  }
+
   logout() {
     let username = localStorage.getItem('username_key');
     localStorage.removeItem('auth_key');

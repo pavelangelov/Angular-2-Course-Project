@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ViewModel } from '../../registration/registration-model';
+import { UserService } from '../../services/user.service';
 
 @Component({
   templateUrl: './user-profile.component.html',
@@ -9,7 +10,7 @@ import { ViewModel } from '../../registration/registration-model';
 export class UserProfileComponent implements OnInit {
   private model: ViewModel;
   private image = localStorage.getItem('image_key');
-  constructor() {
+  constructor(private userService: UserService) {
   }
 
   ngOnInit() {
@@ -17,6 +18,8 @@ export class UserProfileComponent implements OnInit {
 
     this.model = new ViewModel();
     this.model.username = localStorage.getItem('username_key');
+
+    this.userService.getUserByUserName(this.model.username);
   }
 
   onSubmit() {
