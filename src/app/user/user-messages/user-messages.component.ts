@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './user-messages.component.html',
@@ -6,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserMessagesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+    if (!localStorage.getItem('username_key')) {
+      this.router.navigate(['/home']);
+    }
   }
 
 }

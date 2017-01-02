@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Observer  } from 'rxjs/Rx';
+import { Router } from '@angular/router';
+import { Observable, Observer } from 'rxjs/Rx';
 import { } from 'rxjs/add/operator/map';
 
 import { Notificator } from '../../utils/';
@@ -14,19 +15,23 @@ export class UserPostsComponent implements OnInit {
   private postContent: string;
   private posts: [{}];
 
-  constructor(private service: PostService, private notificator: Notificator) { }
+  constructor(private service: PostService, private notificator: Notificator, private router: Router) { }
 
   ngOnInit() {
-    let username = localStorage.getItem('username_key');
-    this.service.getPosts(username)
-      .subscribe(res => {
-        if (res.error) {
-          this.notificator.showError('Posts error', res.error);
-          this.posts = [{}];
-        } else {
-         this.posts = res.result;
-        }
-      });
+    if (!localStorage.getItem('username_key')) {
+      this.router.navigate(['/home']);
+    } else {
+      let username = localStorage.getItem('username_key');
+      this.service.getPosts(username)
+        .subscribe(res => {
+          if (res.error) {
+            this.notificator.showError('Posts error', res.error);
+            this.posts = [{}];
+          } else {
+            this.posts = res.result;
+          }
+        });
+    }
   }
 
   createPost() {
