@@ -1,8 +1,8 @@
 <div class="col-sm-6 user-control" [ngSwitch]="isLogged">
     <div *ngSwitchCase="true" class="col-sm-offset-8">
-        <img src="{{image}}" alt="image" width="60" height="40">
-        <a routerLink="/user/profile">{{username}}</a>
-        <button class="btn btn-alert" (click)="logoutUser()">Logout</button>
+        <img src="{{image}}" alt="image" width="40" height="40">
+        <a routerLink="/user/profile" class="btn">{{username}}</a>
+        <button class="btn btn-default btn-xs" (click)="logoutUser()">Logout</button>
     </div>
     <div *ngSwitchDefault>
         <form action="user-control" method="POST" class="form-inline col-sm-12">
