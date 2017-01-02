@@ -7,19 +7,23 @@
   <button class="btn btn-success" (click)="createPost()">Greate</button>
 </form>
 
-<ul class="posts col-sm-11">
-  <li *ngFor="let post of posts" class="col-sm-9 col-sm-offset-1">
-    <img src={{post?.image}} alt="image">
-    <a href="">{{post?.author}}</a>
-    <span *ngIf="post?.targetUser">
-      to
-      <a href="">{{post?.targetUser}}</a>
-    </span>
-    <div>
-      {{post?.content}}
+<ul class="posts col-sm-11 col-sm-offset-1 list-group">
+  <li *ngFor="let post of posts" class="col-sm-9 col-sm-offset-1 list-group-item post">
+    <div class="list-group-item-heading">
+      <h4 class="col-sm-offset-2">
+        <a href="">{{post?.author}}</a>
+        <span *ngIf="post?.targetUser">
+          to
+          <a href="">{{post?.targetUser}}</a>
+        </span>
+      </h4>
     </div>
-    <div>
-      <span>{{post?.postDate}}</span>
+    <div class="image-container">
+      <img src={{post?.image}} alt="image" class="col-sm-2" width="60" height="80">
+    </div>
+    <div class="list-group-item-text">
+      <p>{{post?.content}}</p>
+      <p class="bottom-align-text text-right">Posted on: {{post?.postDate}}</p>
     </div>
   </li>
 </ul>
