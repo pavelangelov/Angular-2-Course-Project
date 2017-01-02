@@ -25,7 +25,6 @@ export class SearchFriendsComponent implements OnInit {
             this.notificator.showError('Search error', res.error);
             return;
           }
-
           this.users = res.result;
         });
     } else {
