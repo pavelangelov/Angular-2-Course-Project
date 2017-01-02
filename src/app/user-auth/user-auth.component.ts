@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import * as CryptoJS from '../../../node_modules/crypto-js';
 
 import { UserService } from '../services/user.service';
 import { Notificator } from '../utils/';
@@ -31,6 +32,7 @@ export class UserAuthComponent implements OnInit {
   }
 
   loginUser(username: string, password: string) {
+    password = CryptoJS.SHA256(password).toString();
     this.userService.login(username, password)
       .subscribe((result) => {
         if (result.success) {

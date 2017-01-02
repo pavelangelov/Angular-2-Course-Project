@@ -11,8 +11,8 @@ router.post("/login", (req, res) => {
     let username = req.body.username,
         password = req.body.password;
     // TODO: create real validation
-    if (username.length < 3 || password.length < 3) {
-        res.send({error: 'Username and password must have more tha 2 symbols!'});
+    if (password.length < 40) {
+        res.send({error: 'Invalid password length!'});
         return;
     }
 
