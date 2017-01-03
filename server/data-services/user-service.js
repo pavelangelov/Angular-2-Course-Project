@@ -181,18 +181,6 @@ module.exports = {
             )
         });
     },
-    getFiltredUsersByPartOfFullname(value) {
-        // value = validator.escapeBadSymbols(value);
-        return new Promise((resolve, reject) => {
-            User.find({ "fullname": { "$regex": value, "$options": "i" } }, (err, docs) => {
-                if (err) {
-                    return reject(err);
-                }
-
-                return resolve(docs);
-            });
-        });
-    },
     getUserById(id) {
         return new Promise((resolve, reject) => {
             User.findOne({ "_id": id }, (err, user) => {
@@ -214,51 +202,6 @@ module.exports = {
                 return resolve(user);
             });
         });
-    },
-    getNonFriendsUsers(str, user) {
-        return new Promise((resolve, reject) => {
-            let userFriends = user.friends || [];
-            userFriends.push(user);
-            let searchedUsers = [],
-                findedUsers = [];
-            User.find((err, users) => {
-                if (err) {
-                    return reject(err);
-                }
-                userFriends.forEach((f) => {
-                    let id = f.id;
-                    users.forEach((u) => {
-                        if (u.id != id) {
-                            searchedUsers.push(u);
-                        }
-                    });
-                });
-                searchedUsers.forEach((f) => {
-                    if (f.username.indexOf(str) > -1) {
-                        findedUsers.push(f);
-                    } else if (f.fullname.indexOf(str) > -1) {
-                        findedUsers.push(f);
-                    }
-                });
-                return resolve(findedUsers);
-            });
-        });
-    },
-    getTeamMembers() {
-        let team = fakeDb.teamMembers;
-
-        return Promise.resolve()
-            .then(() => {
-                return team;
-            });
-    },
-    getAnonymousUser() {
-        let user = fakeDb.anonymousUser;
-
-        return Promise.resolve()
-            .then(() => {
-                return user;
-            });
     },
     addUnreadMessage(userId) {
         return new Promise((resolve, reject) => {
