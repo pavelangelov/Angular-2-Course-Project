@@ -57,5 +57,19 @@ module.exports = (router, data) => {
         data.users.getUserByUsername(username)
             .then(data => res.send({ success: true, result: data }))
             .catch(err => res.send({ error: err.message }));
+    })
+    .post('/user/send-request', (req, res) => {
+        let username = req.body.reciever,
+            request = req.body.request;
+        
+        data.users.sendRequest(username, request)
+            .then(data => {
+                if (!data) {
+                    res.send({ message: "This user already has request from you!"});
+                } else {
+                    res.send({ success: true});
+                }
+            })
+            .catch(err => res.send(err.message));
     });
 }

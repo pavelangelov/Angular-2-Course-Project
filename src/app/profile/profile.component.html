@@ -8,6 +8,14 @@
     <h4>Lastname: {{user?.lastname}}</h4>
     <div>Info: {{user?.userInfo}}</div>
   </div>
+  <div [ngSwitch]="user?.isFriend">
+    <div *ngSwitchCase="true">
+      <button class="btn btn-default" (click)="createPost()">Create post</button>
+    </div>
+    <div *ngSwitchDefault>
+      <button class="btn btn-default" (click)="sendFriendshiRequest()">Send friendship request</button>
+    </div>
+  </div>
 </div>
 
 <div class=" col-sm-5 col-sm-offset-1">
@@ -23,8 +31,8 @@
   <button [hidden]="areShowedPosts" (click)="showPosts()">Some of {{user?.username}} posts:</button>
   <button [hidden]="!areShowedPosts" (click)="hidePosts()">Hide posts:</button>
 </h4>
-<div class="posts">
-  <ul [hidden]="!areShowedPosts" class="posts col-sm-11 col-sm-offset-1 list-group">
+<div [hidden]="!areShowedPosts"  class="posts">
+  <ul class="posts col-sm-11 col-sm-offset-1 list-group">
     <li *ngFor="let post of posts" class="col-sm-9 col-sm-offset-1 list-group-item post">
       <div class="list-group-item-heading">
         <h4 class="col-sm-offset-2">

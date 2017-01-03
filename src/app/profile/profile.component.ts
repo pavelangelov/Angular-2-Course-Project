@@ -38,6 +38,9 @@ export class ProfileComponent implements OnInit {
                 return;
               }
 
+              if (res.result['friends'].some(f => f['username'] === currentUser)) {
+                res.result.isFriend = true;
+              }
               this.user = res.result;
             });
         }
@@ -62,5 +65,30 @@ export class ProfileComponent implements OnInit {
   }
   hidePosts() {
     this.areShowedPosts = false;
+  }
+
+  sendFriendshiRequest() {
+    let request = {
+      requestUser: localStorage.getItem('username_key'),
+      requestUserImage: localStorage.getItem('image_key')
+    };
+
+    this.service.sendRequest(this.user['username'], request)
+      .subscribe(res => {
+        if (res.error) {
+          this.notificator.showError('Sending request error', res.error);
+          return;
+        } else if (!res.success) {
+          this.notificator.showError('Sending request error', res.message);
+          return;
+        }
+
+        this.notificator.showSuccess('Request send', 'Successfully');
+      })
+
+  }
+
+  createPost() {
+
   }
 }

@@ -69,6 +69,13 @@ export class UserService {
         .map(res => res.json());
   }
 
+  sendRequest(reciever: string, request) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('api/user/send-request', JSON.stringify({ reciever, request }), { headers })
+      .map(res => res.json());
+  }
+
   isLoggedIn(): boolean {
     return this.loggedIn;
   }

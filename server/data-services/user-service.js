@@ -124,8 +124,9 @@ module.exports = {
     sendRequest(username, request) {
         return new Promise((resolve, reject) => {
             User.findOneAndUpdate(
-                { "username": username }, 
-                { $push: { "requests": request } },
+                { "username": username,
+                    "requests.requestUser": { $ne: request['requestUser'] }}, 
+                { $addToSet: { "requests": request } },
                 { save: true },
                 (err, dbReq) => {
                     if (err) {
@@ -209,7 +210,7 @@ module.exports = {
                 if (err) {
                     return reject(err);
                 }
-                
+
                 return resolve(user);
             });
         });
