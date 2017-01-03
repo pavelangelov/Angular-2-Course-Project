@@ -9,7 +9,7 @@
     <div class="user">
       <img src="{{user?.profileImage}}" alt="image" class="col-sm-3">
       <div class="col-sm-9">
-        <h4> Username: <a href="">{{user?.username}}</a></h4>
+        <h4> Username: <a routerLink="/users/{{user?.username}}">{{user?.username}}</a></h4>
         <h4> Name: {{user?.fullname}}</h4>
       </div>
     </div>

@@ -12,12 +12,14 @@ import { SearchFriendsComponent } from './search-friends/search-friends.componen
 import { DropdownMenuComponent } from './user/dropdown-menu/dropdown-menu.component';
 import { UserGalleryComponent } from './user/user-gallery/user-gallery.component';
 import { UserPostsComponent } from './user/user-posts/user-posts.component';
+import { ProfileComponent } from './profile/profile.component';
 
 export const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home'},
   { path: 'home', component: HomeComponent },
   { path: 'register', component: RegistrationComponent },
   { path: 'search', component: SearchFriendsComponent},
+  { path: 'users/:username', component: ProfileComponent},
   {
     path: 'user',
     component: UserHomeComponent,

@@ -50,5 +50,12 @@ module.exports = (router, data) => {
         data.users.getUsersByUsername(username)
             .then(data => res.send({ success: true, result: data }))
             .catch(err => res.send({ error: err.message }));
+    })
+    .get("/user/:username", (req, res) => {
+        let username = req.params.username;
+
+        data.users.getUserByUsername(username)
+            .then(data => res.send({ success: true, result: data }))
+            .catch(err => res.send({ error: err.message }));
     });
 }

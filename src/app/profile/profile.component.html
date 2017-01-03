@@ -1,0 +1,22 @@
+<h2 class="col-sm-9 col-sm-offset-3">This is the profile page of {{user?.username}}</h2>
+<div class="col-sm-6">
+  <div class="image-container col-sm-5">
+    <img src="{{user?.profileImage}}" alt="image">
+  </div>
+  <div class="user-info col-sm-6">
+    <h4>Firstname: {{user?.firstname}}</h4>
+    <h4>Lastname: {{user?.lastname}}</h4>
+    <div>Info: {{user?.userInfo}}</div>
+  </div>
+</div>
+
+<div class=" col-sm-5 col-sm-offset-1">
+  <h4>{{user?.username}} pictures</h4>
+  <ul class="list-group">
+    <li *ngFor="let image of user?.images" class="list-group-item">
+      <img src="{{image}}" alt="image" width="200" height="200">
+    </li>
+  </ul>
+</div>
+
+<h4 class="row col-sm-10 col-sm-offset-2">Some of {{user?.username}} posts:</h4>

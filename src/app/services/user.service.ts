@@ -62,6 +62,13 @@ export class UserService {
       .map(res => res.json());
   }
 
+  getUserByUsername(username: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(`api/user/${username}`, { headers })
+        .map(res => res.json());
+  }
+
   isLoggedIn(): boolean {
     return this.loggedIn;
   }
