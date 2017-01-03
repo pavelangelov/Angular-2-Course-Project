@@ -90,10 +90,10 @@ module.exports = {
                 });
         });
     },
-    addImage(userId, imgUrl) {
+    addImage(username, imgUrl) {
         return new Promise((resolve, reject) => {
             User.findOneAndUpdate(
-                { "_id": userId},
+                { "username": username},
                 { $push: { "images": imgUrl } },
                 { new: true },
                 (err, data) => {
@@ -106,10 +106,10 @@ module.exports = {
             )
         })
     },
-    setProfileImage(userId, imgUrl) {
+    setProfileImage(username, imgUrl) {
         return new Promise((resolve, reject) => {
             User.findOneAndUpdate(
-                { "_id": userId },
+                { "username": username },
                 { "profileImage": imgUrl},
                 {new: true},
                 (err, user) => {

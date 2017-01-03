@@ -91,6 +91,10 @@ export class ProfileComponent implements OnInit {
 
   createPost() {
     let  targetUser = this.user['username'];
+    if (!this.postContent || this.postContent.length < 1) {
+      this.notificator.showError('Post content', 'cannot be empty');
+      return;
+    }
 
     this.postService.createPost(this.currentUser, this.postContent, targetUser)
       .subscribe(res => {

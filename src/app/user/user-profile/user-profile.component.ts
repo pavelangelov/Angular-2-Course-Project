@@ -10,7 +10,8 @@ import { Notificator } from '../../utils/';
 })
 export class UserProfileComponent implements OnInit {
   private user;
-  @Output() onChange = new EventEmitter<boolean>();
+  private fileToUpload;
+  private addPhotoShown = false;
 
   constructor(private service: UserService, private notificator: Notificator) {
   }
@@ -54,7 +55,6 @@ export class UserProfileComponent implements OnInit {
           this.user = res.result;
           console.log(this.user);
           localStorage.setItem('requests-count', this.user['requests'].length);
-          this.onChange.emit(true);
         }
       });
   }
@@ -67,5 +67,34 @@ export class UserProfileComponent implements OnInit {
     }
 
     return true;
+  }
+
+  toggleAddPhoto() {
+    this.addPhotoShown = !this.addPhotoShown;
+  }
+
+  onChange(event) {
+    this.fileToUpload = event.srcElement.files[0];
+  }
+
+  upload() {
+    if (this.fileToUpload['type'].indexOf('image') < 0) {
+      this.notificator.showError('Invalid file', 'Must choose image file.');
+      return;
+    }
+
+    this.service.uploadImage(this.fileToUpload, this.user['username'])
+      .subscribe(res => {
+        if (res.error) {
+          this.notificator.showError('Upload image error', res.error);
+          return;
+        } else if (!res.result) {
+          this.notificator.showError('Server is busy', 'Try again later');
+          return;
+        }
+
+        this.notificator.showSuccess('Photo uploaded', 'Successfully');
+        console.log(res.result);
+      });
   }
 }

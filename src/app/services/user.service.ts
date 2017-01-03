@@ -74,7 +74,7 @@ export class UserService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.get(`api/user/${username}`, { headers })
-        .map(res => res.json());
+      .map(res => res.json());
   }
 
   sendRequest(reciever: string, request) {
@@ -87,9 +87,25 @@ export class UserService {
   confirmRequest(firstUser, secondUser, requestId) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('api/user/confirm-request', JSON.stringify({ firstUser, secondUser, requestId}), { headers })
+    return this.http.post('api/user/confirm-request', JSON.stringify({ firstUser, secondUser, requestId }), { headers })
       .map(res => res.json());
 
+  }
+
+  uploadImage(file, username) {
+    let input = new FormData();
+    input.append('file', file);
+    return this.http.post(`api/user/upload/${username}`, input)
+              .map(res => {
+                      return res.json();
+                    });
+  }
+
+  updateProfilePicture(username, imageUrl) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('api/user/update-profile-image', JSON.stringify({username, imageUrl}), {headers})
+      .map(res => res.json());
   }
 
   isLoggedIn(): boolean {
