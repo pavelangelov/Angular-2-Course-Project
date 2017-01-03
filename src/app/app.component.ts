@@ -9,5 +9,5 @@ import { UserService } from './services/user.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Header of our site!';
+  title = 'Angular-2 Social Network';
 }

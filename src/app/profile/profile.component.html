@@ -1,7 +1,7 @@
 <h2 class="col-sm-9 col-sm-offset-3">This is the profile page of {{user?.username}}</h2>
 <div class="col-sm-6">
   <div class="image-container col-sm-5">
-    <img src="{{user?.profileImage}}" alt="image">
+    <img src="{{user?.profileImage}}" alt="image" width="200" height="200">
   </div>
   <div class="user-info col-sm-6">
     <h4>Firstname: {{user?.firstname}}</h4>
@@ -9,7 +9,7 @@
     <div>Info: {{user?.userInfo}}</div>
   </div>
   <div [ngSwitch]="user?.isFriend">
-    <div *ngSwitchCase="true">
+    <div *ngSwitchCase="true" class="col-sm-5">
       <button class="btn btn-default" (click)="createPost()">Create post</button>
       <textarea [(ngModel)]="postContent" class="form-control" cols="5" rows="2"></textarea>
     </div>

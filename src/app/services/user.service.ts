@@ -101,6 +101,13 @@ export class UserService {
                     });
   }
 
+  updateProfilePicture(username, imageUrl) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('api/user/update-profile-image', JSON.stringify({username, imageUrl}), {headers})
+      .map(res => res.json());
+  }
+
   isLoggedIn(): boolean {
     return this.loggedIn;
   }

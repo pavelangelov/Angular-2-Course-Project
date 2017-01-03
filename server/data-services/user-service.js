@@ -106,10 +106,10 @@ module.exports = {
             )
         })
     },
-    setProfileImage(userId, imgUrl) {
+    setProfileImage(username, imgUrl) {
         return new Promise((resolve, reject) => {
             User.findOneAndUpdate(
-                { "_id": userId },
+                { "username": username },
                 { "profileImage": imgUrl},
                 {new: true},
                 (err, user) => {

@@ -23,21 +23,35 @@ export class UserGalleryComponent implements OnInit {
       this.service.getUserByUsername(username)
         .subscribe(res => {
           if (res.error) {
-          this.notificator.showError('Loading gallery error', res.error);
-          return;
-        } else if (!res.success) {
-          this.notificator.showError('Server is busy', 'Try again later');
-          return;
-        }
+            this.notificator.showError('Loading gallery error', res.error);
+            return;
+          } else if (!res.success) {
+            this.notificator.showError('Server is busy', 'Try again later');
+            return;
+          }
 
-        this.user = res.result;
-        this.images = this.user['images'];
+          this.user = res.result;
+          this.images = this.user['images'];
         });
     }
   }
 
   setProfilePicture(event) {
     let imageUrl = event.toElement.id;
-    console.log(imageUrl);
+    this.service.updateProfilePicture(this.user['username'], imageUrl)
+      .subscribe(res => {
+        if (res.error) {
+          this.notificator.showError('Updating profile error', res.error);
+          return;
+        } else if (!res.success) {
+          this.notificator.showError('Server is busy', 'Try again later');
+          return;
+        }
+
+        this.notificator.showSuccess('Profile picture', 'Updated successfully');
+        this.user = res.result;
+        localStorage.setItem('image_key', this.user['profileImage']);
+        this.router.navigate(['/']);
+      });
   }
 }

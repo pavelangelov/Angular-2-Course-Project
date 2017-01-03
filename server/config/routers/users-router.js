@@ -2,10 +2,13 @@
 
 let multipart = require("connect-multiparty"),
     multipartMiddleware = multipart(),
-    cloudinary = require('cloudinary'),
-    config = require("./cloudinary-config");
+    cloudinary = require('cloudinary');
 
-cloudinary.config(config);
+cloudinary.config({
+    cloud_name: process.env['CLOUDINARY_CLOUD_NAME'],
+    api_key: process.env['CLOUDINARY_API_KEY'],
+    api_secret: process.env['CLOUDINARY_API_SECRET']
+});
 
 module.exports = (router, data) => {
     router.post("/login", (req, res) => {
@@ -113,5 +116,18 @@ module.exports = (router, data) => {
                         .catch(err => res.send({ error: err.message }));
                 });
             }
+        })
+        .post('/user/update-profile-image', (req, res) => {
+            let username = req.body.username,
+                imageUrl = req.body.imageUrl;
+            data.users.setProfileImage(username, imageUrl)
+                .then(data => {
+                    if (!data) {
+                        res.send({ error: "User not found!" });
+                    } else {
+                        res.send({ success: true, result: data });
+                    }
+                })
+                .catch(err => res.send({ error: err.message }));
         });
 }
