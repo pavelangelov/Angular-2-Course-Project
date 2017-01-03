@@ -11,10 +11,10 @@
   <li *ngFor="let post of posts" class="col-sm-9 col-sm-offset-1 list-group-item post">
     <div class="list-group-item-heading">
       <h4 class="col-sm-offset-2">
-        <a href="">{{post?.author}}</a>
+        <a routerLink="/users/{{post?.author}}">{{post?.author}}</a>
         <span *ngIf="post?.targetUser">
           to
-          <a href="">{{post?.targetUser}}</a>
+          <a routerLink="/users/{{post?.targetUser}}">{{post?.targetUser}}</a>
         </span>
       </h4>
     </div>

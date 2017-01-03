@@ -87,9 +87,14 @@ export class UserProfileComponent implements OnInit {
       .subscribe(res => {
         if (res.error) {
           this.notificator.showError('Upload image error', res.error);
+          return;
+        } else if (!res.result) {
+          this.notificator.showError('Server is busy', 'Try again later');
+          return;
         }
 
-        console.log(res);
+        this.notificator.showSuccess('Photo uploaded', 'Successfully');
+        console.log(res.result);
       });
   }
 }

@@ -1,5 +1,10 @@
 <h3 class="col-sm-9 col-sm-offset-2">Your images</h3>
 
-<div class="user-images col-sm-11">
-  <h1>Show here if user have images</h1>
+<div class=" col-sm-12 col-sm-offset-1">
+  <ul class="list-group">
+    <li *ngFor="let image of images" class="list-group-item col-sm-3">
+      <img src="{{image}}" alt="image" width="200" height="200">
+      <button class="btn btn-success btn-xs" data-id="{{image}}" (click)="setProfilePicture($event)">Set as profile picture</button>
+    </li>
+  </ul>
 </div>
