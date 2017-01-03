@@ -37,7 +37,7 @@ module.exports = {
             User.findOneAndUpdate(
                 { "username": username, "password": password},
                 { "isOnline": true},
-                { save: true },
+                { new: true },
                 (err, user) => {
                     if (err) {
                         return reject(err);
@@ -55,7 +55,7 @@ module.exports = {
             User.findOneAndUpdate(
                 { "username": username },
                 { "isOnline": false},
-                { save: true},
+                { new: true},
                 (err, data) => {
                     if (err) {
                         return reject(err);
@@ -81,7 +81,7 @@ module.exports = {
                     "lastname": lastName, 
                     "userInfo": userInfo 
                 }, 
-                { save: true },
+                { new: true },
                 (err, user1) => {
                     if (err) {
                         return reject(err);
@@ -95,7 +95,7 @@ module.exports = {
             User.findOneAndUpdate(
                 { "_id": userId},
                 { $push: { "images": imgUrl } },
-                { save: true },
+                { new: true },
                 (err, data) => {
                     if (err) {
                         return reject(err);
@@ -111,6 +111,7 @@ module.exports = {
             User.findOneAndUpdate(
                 { "_id": userId },
                 { "profileImage": imgUrl},
+                {new: true},
                 (err, user) => {
                     if (err) {
                         return reject(err);
@@ -128,7 +129,7 @@ module.exports = {
                 { "username": username,
                     "requests.requestUser": { $ne: request['requestUser'] }}, 
                 { $addToSet: { "requests": request } },
-                { save: true },
+                { new: true },
                 (err, dbReq) => {
                     if (err) {
                         return reject(err);
@@ -158,7 +159,7 @@ module.exports = {
             User.findOneAndUpdate(
                 { "username": username }, 
                 { $pull: { "requests": { "_id": requestId } } }, 
-                { safe: true },
+                { new: true },
                 (err, user) => {
                     if (err) {
                         return reject(err);
@@ -209,7 +210,7 @@ module.exports = {
             User.findOneAndUpdate(
                 { "_id": userId },
                 { $inc: { "unreadMessages": 1 } },
-                { save: true },
+                { new: true },
                 (err, user) => {
                     if (err) {
                         return reject(err);
@@ -225,7 +226,7 @@ module.exports = {
             User.findOneAndUpdate(
                 { "_id": userId },
                 { "unreadMessages": 0 },
-                { save: true },
+                { new: true },
                 (err, user) => {
                     if (err) {
                         return reject(err);

@@ -86,7 +86,7 @@ module.exports = (router, data) => {
                         res.send({});
                         return;
                     }
-
+                    
                     res.send({success: true, result: dbUser});
                 })
                 .catch(err => res.send({error: err.message}));

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { UserService } from '../../services/';
 import { Notificator } from '../../utils/';
@@ -10,6 +10,7 @@ import { Notificator } from '../../utils/';
 })
 export class UserProfileComponent implements OnInit {
   private user;
+  @Output() onChange = new EventEmitter<boolean>();
 
   constructor(private service: UserService, private notificator: Notificator) {
   }
@@ -26,12 +27,10 @@ export class UserProfileComponent implements OnInit {
           return;
         }
         this.user = res.result;
-        console.log(this.user);
       });
   }
 
   confirm(event) {
-    console.log('Confirm request');
     let requestId = event.toElement.id,
         currentUser = {
       username: this.user['username'],
@@ -53,6 +52,9 @@ export class UserProfileComponent implements OnInit {
         } else {
           this.notificator.showSuccess('Request', 'Confirmed');
           this.user = res.result;
+          console.log(this.user);
+          localStorage.setItem('requests-count', this.user['requests'].length);
+          this.onChange.emit(true);
         }
       });
   }

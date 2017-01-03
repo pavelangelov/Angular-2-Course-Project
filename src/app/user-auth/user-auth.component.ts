@@ -28,6 +28,7 @@ export class UserAuthComponent implements OnInit {
     if (this.isLogged) {
       this.username = localStorage.getItem('username_key');
       this.image = localStorage.getItem('image_key');
+      this.requests = localStorage.getItem('requests-count');
       this.isLogged = true;
     } else {
       this.router.navigate(['/home']);
@@ -62,5 +63,8 @@ export class UserAuthComponent implements OnInit {
         }
       });
     this.router.navigate(['home']);
+  }
+  onChange(degree: boolean) {
+    this.requests = this.requests -= 1;
   }
 }
