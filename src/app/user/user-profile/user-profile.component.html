@@ -1,8 +1,34 @@
-<div class="profile-container">
-    <div class="image-container col-sm-4">
-        <img src="{{image}}" alt="">
+<div class="col-sm-6">
+    <div class="image-container col-sm-5">
+        <img src="{{user?.profileImage}}" alt="image">
     </div>
-    <div class="user-info">
-        <h3>{{model.username}}</h3>
+    <div class="user-info col-sm-6">
+        <h4>Firstname: {{user?.firstname}}</h4>
+        <h4>Lastname: {{user?.lastname}}</h4>
+        <div>Info: {{user?.userInfo}}</div>
     </div>
+</div>
+<div class=" col-sm-5 col-sm-offset-1">
+    <h4>Update profile</h4>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <a href="">Update personal info</a>
+        </li>
+        <li class="list-group-item">
+            <a href="">Upload new photo</a>
+        </li>
+    </ul>
+</div>
+<div class="col-sm-10 col-sm-offset-1">
+    <h4>Unconfirmed friendship requests</h4>
+    <ul [hidden]="!hasRequests()" class="list-group">
+        <li *ngFor="let request of user?.requests" class="list-group-item col-sm-10">
+            <img src="{{request?.requestUserImage}}" alt="image" width="100" height="100" class="col-sm-4">
+            <div class="col-sm-6">
+                <h4>{{request?.requestUser}}</h4>
+                <button class="btn btn-success" data-id="{{request?._id}}" (click)="confirm($event)">Confirm</button>
+            </div>
+        </li>
+    </ul>
+    <h5 [hidden]="hasRequests()">No requests.</h5>
 </div>

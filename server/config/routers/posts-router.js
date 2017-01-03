@@ -12,7 +12,7 @@ module.exports = (router, data) => {
     .post("/post", (req, res) => {
         data.posts.createPost(req.body)
             .then(data => {
-                res.send({ success: true, post: data });
+                res.send({ success: true, result: data });
             })
             .catch(err => res.send({ error: err.message }));
     })

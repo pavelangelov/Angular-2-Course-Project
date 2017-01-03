@@ -1,1 +1,11 @@
-<h3>Your friends</h3>
+<h3 class="col-sm-9 col-sm-offset-3">Your friends</h3>
+<ul class="results col-sm-10 list-group">
+  <li *ngFor="let friend of friends" class="list-group-item col-sm-6">
+    <div class="friend">
+      <img src="{{friend?.image}}" alt="image" class="col-sm-3">
+      <div class="col-sm-9">
+        <h4> Username: <a routerLink="/users/{{friend?.username}}">{{friend?.username}}</a></h4>
+      </div>
+    </div>
+  </li>
+</ul>
