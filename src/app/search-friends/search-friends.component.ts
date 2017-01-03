@@ -25,7 +25,8 @@ export class SearchFriendsComponent implements OnInit {
             this.notificator.showError('Search error', res.error);
             return;
           }
-          this.users = res.result;
+          let currentUser = localStorage.getItem('username_key');
+          this.users = res.result.filter(x => x['username'] !== currentUser);
         });
     } else {
       this.users = [];
