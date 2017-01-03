@@ -15,6 +15,7 @@ export class UserAuthComponent implements OnInit {
   private isLogged: boolean = false;
   private username: string;
   private image: string;
+  private requests;
 
   public options;
 
@@ -40,6 +41,7 @@ export class UserAuthComponent implements OnInit {
         if (result.success) {
           this.username = localStorage.getItem('username_key');
           this.image = localStorage.getItem('image_key');
+          this.requests = localStorage.getItem('requests-count');
           this.isLogged = true;
 
           this.notificator.showSuccess('Login', 'Success');

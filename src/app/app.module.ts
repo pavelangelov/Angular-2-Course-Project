@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { SearchFriendsComponent } from './search-friends/search-friends.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     userComponents.UserFriendsComponent,
     userComponents.DropdownMenuComponent,
     userComponents.UserGalleryComponent,
-    userComponents.UserPostsComponent
+    userComponents.UserPostsComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,

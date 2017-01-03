@@ -42,10 +42,6 @@ let userSchema = new Schema({
                 type: String,
                 required: true
             },
-            requestUserFullname: {
-                type: String,
-                required: true
-            },
             requestUserImage: {
                 type: String,
                 required: true

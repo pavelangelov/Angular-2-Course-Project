@@ -28,6 +28,13 @@ export class UserService {
           localStorage.setItem('auth_key', res.authKey);
           localStorage.setItem('username_key', res.username);
           localStorage.setItem('image_key', res.image);
+          let requests;
+          if (res.requests) {
+            requests = res.requests.length;
+          } else {
+            requests = 0;
+          }
+          localStorage.setItem('requests-count', requests);
           this.loggedIn = true;
         }
 
@@ -40,6 +47,7 @@ export class UserService {
     localStorage.removeItem('auth_key');
     localStorage.removeItem('username_key');
     localStorage.removeItem('image_key');
+    localStorage.removeItem('requests-count');
     this.loggedIn = false;
 
     let headers = new Headers();
@@ -53,6 +61,27 @@ export class UserService {
 
         return res;
       });
+  }
+
+  findUsers(username: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(`api/users/${username}`, { headers })
+      .map(res => res.json());
+  }
+
+  getUserByUsername(username: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(`api/user/${username}`, { headers })
+        .map(res => res.json());
+  }
+
+  sendRequest(reciever: string, request) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('api/user/send-request', JSON.stringify({ reciever, request }), { headers })
+      .map(res => res.json());
   }
 
   isLoggedIn(): boolean {

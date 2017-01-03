@@ -17,7 +17,8 @@ module.exports = (router, data) => {
                     success: true,
                     username: user.username,
                     image: user.profileImage,
-                    authKey: user.authKey
+                    authKey: user.authKey,
+                    requests: user.requests
                 })
             })
             .catch(err => res.send({error: err.message}));
@@ -43,5 +44,33 @@ module.exports = (router, data) => {
                 res.send({ success: true });
             })
             .catch(err => res.send({ error: err.message }));
+    })
+    .get("/users/:username", (req, res) => {
+        let username = req.params.username;
+
+        data.users.getUsersByUsername(username)
+            .then(data => res.send({ success: true, result: data }))
+            .catch(err => res.send({ error: err.message }));
+    })
+    .get("/user/:username", (req, res) => {
+        let username = req.params.username;
+
+        data.users.getUserByUsername(username)
+            .then(data => res.send({ success: true, result: data }))
+            .catch(err => res.send({ error: err.message }));
+    })
+    .post('/user/send-request', (req, res) => {
+        let username = req.body.reciever,
+            request = req.body.request;
+        
+        data.users.sendRequest(username, request)
+            .then(data => {
+                if (!data) {
+                    res.send({ message: "This user already has request from you!"});
+                } else {
+                    res.send({ success: true});
+                }
+            })
+            .catch(err => res.send(err.message));
     });
 }
