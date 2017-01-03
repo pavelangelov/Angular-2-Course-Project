@@ -90,10 +90,10 @@ module.exports = {
                 });
         });
     },
-    addImage(userId, imgUrl) {
+    addImage(username, imgUrl) {
         return new Promise((resolve, reject) => {
             User.findOneAndUpdate(
-                { "_id": userId},
+                { "username": username},
                 { $push: { "images": imgUrl } },
                 { new: true },
                 (err, data) => {

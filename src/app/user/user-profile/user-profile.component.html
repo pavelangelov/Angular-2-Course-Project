@@ -15,7 +15,11 @@
             <a href="">Update personal info</a>
         </li>
         <li class="list-group-item">
-            <a href="">Upload new photo</a>
+            <button class="btn btn-default" (click)="toggleAddPhoto()">Upload new photo</button>
+            <div [hidden]="!addPhotoShown">
+                <input type="file" class="btn" (change)="onChange($event)">
+                <button class="btn btn-success" (click)="upload()">Upload</button>
+            </div>
         </li>
     </ul>
 </div>
