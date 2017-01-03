@@ -28,6 +28,13 @@ export class UserService {
           localStorage.setItem('auth_key', res.authKey);
           localStorage.setItem('username_key', res.username);
           localStorage.setItem('image_key', res.image);
+          let requests;
+          if (res.requests) {
+            requests = res.requests.length;
+          } else {
+            requests = 0;
+          }
+          localStorage.setItem('requests-count', requests);
           this.loggedIn = true;
         }
 
@@ -40,6 +47,7 @@ export class UserService {
     localStorage.removeItem('auth_key');
     localStorage.removeItem('username_key');
     localStorage.removeItem('image_key');
+    localStorage.removeItem('requests-count');
     this.loggedIn = false;
 
     let headers = new Headers();

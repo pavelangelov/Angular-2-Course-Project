@@ -17,7 +17,8 @@ module.exports = (router, data) => {
                     success: true,
                     username: user.username,
                     image: user.profileImage,
-                    authKey: user.authKey
+                    authKey: user.authKey,
+                    requests: user.requests
                 })
             })
             .catch(err => res.send({error: err.message}));

@@ -1,7 +1,7 @@
 <div class="col-sm-6 user-control" [ngSwitch]="isLogged">
     <div *ngSwitchCase="true" class="col-sm-offset-8">
         <img src="{{image}}" alt="image" width="40" height="40">
-        <a routerLink="/user/profile" class="btn">{{username}}</a>
+        <a routerLink="/user/profile" class="btn">{{username}}<span class="badge" title="Unconfirmed requets.">{{requests}}</span></a>
         <button class="btn btn-default btn-xs" (click)="logoutUser()">Logout</button>
     </div>
     <div *ngSwitchDefault>
