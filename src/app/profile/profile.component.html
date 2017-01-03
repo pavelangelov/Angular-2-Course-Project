@@ -19,4 +19,32 @@
   </ul>
 </div>
 
-<h4 class="row col-sm-10 col-sm-offset-2">Some of {{user?.username}} posts:</h4>
+<h4 class="row col-sm-10 col-sm-offset-2">
+  <button [hidden]="areShowedPosts" (click)="showPosts()">Some of {{user?.username}} posts:</button>
+  <button [hidden]="!areShowedPosts" (click)="hidePosts()">Hide posts:</button>
+</h4>
+<div class="posts">
+  <ul [hidden]="!areShowedPosts" class="posts col-sm-11 col-sm-offset-1 list-group">
+    <li *ngFor="let post of posts" class="col-sm-9 col-sm-offset-1 list-group-item post">
+      <div class="list-group-item-heading">
+        <h4 class="col-sm-offset-2">
+          <a href="">{{post?.author}}</a>
+          <span *ngIf="post?.targetUser">
+          to
+          <a href="">{{post?.targetUser}}</a>
+        </span>
+        </h4>
+      </div>
+      <div class="image-container">
+        <img src={{post?.image}} alt="image" class="col-sm-2" width="60" height="80">
+      </div>
+      <div class="list-group-item-text">
+        <p>{{post?.content}}</p>
+        <div>
+          <span class="likes-count">Likes {{post?.likes}}</span>
+          <span class="post-date">Posted on: {{post?.postDate}}</span>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
