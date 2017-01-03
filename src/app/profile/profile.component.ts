@@ -12,7 +12,7 @@ import { Notificator } from '../utils/';
 })
 export class ProfileComponent implements OnInit {
   private user: {};
-  private posts: [{}];
+  private posts = [];
   private username: string;
   private areShowedPosts: boolean = false;
   private currentUser;
@@ -90,11 +90,20 @@ export class ProfileComponent implements OnInit {
   }
 
   createPost() {
-    let post = {
-      author: this.currentUser,
-      targetUser: this.user['username'],
-      image: localStorage.getItem('image_key'),
-      content: this.postContent
-    };
+    let  targetUser = this.user['username'];
+
+    this.postService.createPost(this.currentUser, this.postContent, targetUser)
+      .subscribe(res => {
+        if (res.error) {
+          this.notificator.showError('Creating post error', res.error);
+          return;
+        } else if (!res.success) {
+          this.notificator.showError('Sending request error', res.message);
+          return;
+        }
+
+        this.notificator.showSuccess('Post created', 'Successfully');
+        this.posts.unshift(res.result);
+      });
   }
 }
