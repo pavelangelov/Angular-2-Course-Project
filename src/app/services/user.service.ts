@@ -84,6 +84,14 @@ export class UserService {
       .map(res => res.json());
   }
 
+  confirmRequest(firstUser, secondUser, requestId) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('api/user/confirm-request', JSON.stringify({ firstUser, secondUser, requestId}), { headers })
+      .map(res => res.json());
+
+  }
+
   isLoggedIn(): boolean {
     return this.loggedIn;
   }

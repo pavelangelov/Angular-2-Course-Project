@@ -72,5 +72,23 @@ module.exports = (router, data) => {
                 }
             })
             .catch(err => res.send(err.message));
+    })
+    .post("/user/confirm-request", (req, res) => {
+        let firstUser = req.body.firstUser,
+            secondUser = req.body.secondUser,
+            requestId = req.body.requestId;
+        
+        Promise.all([data.users.addFriend(firstUser.username, secondUser),
+                    data.users.addFriend(secondUser.username, firstUser),
+                    data.users.removeRequest(firstUser.username, requestId)])
+                .then(([first, second, dbUser]) => {
+                    if (!dbUser) {
+                        res.send({});
+                        return;
+                    }
+
+                    res.send({success: true, result: dbUser});
+                })
+                .catch(err => res.send({error: err.message}));
     });
 }

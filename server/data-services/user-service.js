@@ -122,6 +122,7 @@ module.exports = {
         })
     },
     sendRequest(username, request) {
+        request._id = request.requestUser + "_" + username;
         return new Promise((resolve, reject) => {
             User.findOneAndUpdate(
                 { "username": username,
