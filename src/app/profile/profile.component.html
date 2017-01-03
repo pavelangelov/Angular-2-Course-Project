@@ -11,6 +11,7 @@
   <div [ngSwitch]="user?.isFriend">
     <div *ngSwitchCase="true">
       <button class="btn btn-default" (click)="createPost()">Create post</button>
+      <textarea [(ngModel)]="postContent" class="form-control" cols="5" rows="2"></textarea>
     </div>
     <div *ngSwitchDefault>
       <button class="btn btn-default" (click)="sendFriendshiRequest()">Send friendship request</button>
